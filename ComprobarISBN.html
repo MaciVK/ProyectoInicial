@@ -8,7 +8,22 @@
     <script type="text/javascript">
 
         function comprobar(){
+            var isbn=document.getElementById("isbn").value;
+            var suma=0;
+            for (var i = 0; i < isbn.length; i++) {
+                var numero=parseInt(isbn.charAt(i));
+                var multiplicacion=numero*(i+1);
+                suma+=multiplicacion;
+                
+            }
+            var resultado=document.getElementById("resultado");
+            if(suma%11==0){
+                resultado.innerText="Numero isbn correcto: "+isbn;
 
+            }else{
+                resultado.innerText="Numero Incorrecto: "+isbn;
+            }
+            
         }
 
     </script>
@@ -19,6 +34,7 @@
     <label> numero ISBN:</label>
     <input type="text" id="isbn" />
     <button type="button" onclick="comprobar()">ComprobarISBN</button>
+    <div id="resultado"></div>
 </body>
 
 </html>
