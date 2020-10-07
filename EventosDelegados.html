@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos Delegados</title>
+    <script type="text/javascript">
+        /*
+        Para agregar eventos al iniciar la pagina hay que usar window.onload
+        
+        */
+        window.onload = function () {
+            //Aqui se asociaria todo
+            var boton = document.getElementById("botonAccion");
+            boton.addEventListener("click", function () {
+                alert("Mensaje cargado...");
+            })
+        }
+
+
+
+
+        /*Creamos una variable global donde incrementamos su valor cuando asociemos un evento
+        Asi veremos el numero de asociaciones y el numero de mensajes que mostremos
+        Diferenciamos onclick de listener*/
+        var contador = 0;
+        function asociarEvento() {
+            contador++;
+            var res = document.getElementById("resultado");
+            res.innerText = "Eventos asociados: " + contador;
+            //boscamos el botón para delegar el evento
+            var boton = document.getElementById("botonAccion");
+            //Se empieza con onclick y funciones externas para ver el comportamiento
+            //No hay pila de llamada y solo se queda con la ultima accion
+
+            //this, en este caso, devuelve el objeto boton "botonAccion"
+
+            /*
+             boton.onclick = mostrarMensaje1;
+             boton.onclick = mostrarMensaje2;
+             */
+
+            //Utilizamos onclick con funciones anonimas
+            //no hay diferencia entre externas y anonimas con el this
+            //this->ObjetoBoton
+            /*
+             boton.onclick = function () {
+                 alert("Anonima 1");
+             }
+             boton.onclick = function () {
+                 alert("Anonima 2" + this);
+             }*/
+
+            //Listener con funciones externas
+            //Si son funciones diferentes, existe pila de llamadas, pero solo se hace 1 vez cada llamada
+            //al ser funcion declarativa (con nombre)
+            //this->ObjetoBoton
+            /*
+             boton.addEventListener("click", mostrarMensaje1);
+             boton.addEventListener("click", mostrarMensaje2);
+            */
+
+            //Listener con funciones anonimas
+            //Esto actua haciendo una pila de llamadas de la misma funcion, al ser anonima, entiende que son funciones diferentes
+            //this->ObjetoBoton
+            boton.addEventListener("click", function () {
+                alert("Mensaje 1" + this);
+
+            });
+        }
+
+        function mostrarMensaje1() {
+            alert("Mensaje 1" + this);
+        }
+
+        function mostrarMensaje2() {
+            alert("Mensaje 2");
+
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Eventos Delegados</h1>
+    <h1 id="resultado" style="color:fuchsia;"></h1>
+    <button type="button" onclick="asociarEvento()">Asociar eventos</button>
+    <button type="button" id="botonAccion">Realizar acciones</button>
+
+</body>
+
+</html>

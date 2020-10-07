@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumar Botones</title>
+    <script type="text/javascript">
+        var resultado;
+        var contador = 0
+        window.onload = function () {
+            resultado = document.getElementById("suma");
+            contador = parseInt(resultado.innerHTML);
+            var boton1 = document.getElementById("boton1");
+            var boton2 = document.getElementById("boton2");
+            var boton3 = document.getElementById("boton3");
+            var boton4 = document.getElementById("boton4");
+            boton1.addEventListener("click", sumar);
+            boton2.addEventListener("click", sumar);
+            boton3.addEventListener("click", sumar);
+            boton4.addEventListener("click", sumar);
+        }
+
+
+        function sumar() {
+          
+            contador += parseInt(this.innerText);
+            resultado.innerText = contador;
+
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <h1>Sumar Botones</h1>
+    <button type="button" id="boton1">19</button>
+    <button type="button" id="boton2">4</button>
+    <button type="button" id="boton3">9</button>
+    <button type="button" id="boton4">26</button>
+    <h1>La suma es: <span id="suma">25</span></h1>
+</body>
+
+</html>
