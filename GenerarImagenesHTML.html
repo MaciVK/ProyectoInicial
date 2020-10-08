@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript">
+
+        window.onload = function () {
+            var rango = document.getElementById("numImagenes");
+            document.getElementById("numero").innerText = rango.value;
+            rango.addEventListener("change", mostrarImagenes);
+            
+        }
+
+        function mostrarImagenes() {
+            //Recuperamos el rango y su valor
+            var rango = this;
+            var span = document.getElementById("numero");
+            span.innerText = rango.value;
+            //generar tantas imagenes como el valor del rango diga
+            var valor = parseInt(rango.value);
+            var select = document.getElementById("selectImagenes");
+            //Entre las propiedades de un <select> hay una que recupera el indice del elemento seleccionado
+            //.selectedIndex
+            var indice = select.selectedIndex;
+            var imagen = select.options[indice].value;
+            var texto = "";
+            for (var i = 1; i <= valor; i++) {
+                texto += "<img src='" + imagen + "'/>'";
+            }
+            document.getElementById("fotos").innerHTML = texto;
+        }
+
+
+
+    </script>
+</head>
+
+<body>
+    <h1>Generar Imagenes JS con String</h1>
+    <form>
+        <select name="elegirImagen" id="selectImagenes">
+            <option value="imgs/perro.jpg">Perrito</option>
+            <option value="imgs/perroCaliente.jpg">Perrito Caliente</option>
+        </select>
+        <input type="range" id="numImagenes" max="20" min="1">
+        <span id="numero"></span>
+        <hr />
+        <div id="fotos"></div>
+    </form>
+</body>
+
+</html>

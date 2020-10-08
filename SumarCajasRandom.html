@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sumar Cajas Random</title>
+    <style type="text/css">
+        input[name="numeros"]:nth-of-type(odd) {
+            background-color: brown;
+        }
+
+        input[name="numeros"]:nth-of-type(even) {
+            background-color: coral;
+        }
+    </style>
+
+    <script type="text/javascript">
+        var suma = 0;
+        var arrayRadios;
+        var arrayInputs;
+        window.onload = function () {
+            var resultado = document.getElementById("resultado");
+            arrayInputs = document.formulario.numeros;
+            arrayRadios = document.getElementsByName("radios");
+            console.log(arrayInputs.length);
+            for (var objeto of arrayInputs) {
+                objeto.value = Math.trunc(Math.random() * (50 - 1) + 1);
+                console.log(objeto.value);
+            }
+        }
+
+        function sumarInput() {
+            var seleccionado;
+            for (var objRadio of arrayRadios) {
+                if (objRadio.checked) {
+                    seleccionado = objRadio;
+                }
+            }
+            if (seleccionado.value == "odd") {
+
+                for (var j = 0; j < arrayInputs.length; j++) {
+                    if (j % 2 == 0) {
+                        suma += parseInt(arrayInputs[j].value);
+                    }
+
+                }
+
+            } else {
+
+                for (var j = 0; j < arrayInputs.length; j++) {
+                    if (j % 2 != 0) {
+                        suma += parseInt(arrayInputs[j].value);
+                    }
+
+                }
+            }
+            resultado.innerText = suma;
+            suma = 0;
+        }
+
+
+    </script>
+
+</head>
+
+<body>
+    <form name="formulario">
+        <h1>Sumar cajas random</h1>
+        <ul>
+            <li>
+                <input type="radio" value="odd" name="radios" />Odd
+            </li>
+            <li>
+                <input type="radio" value="even" name="radios" />Even
+            </li>
+        </ul>
+
+        <input type="number" name="numeros" /><br>
+        <input type="number" name="numeros" /><br>
+        <input type="number" name="numeros" /><br>
+        <input type="number" name="numeros" /><br>
+        <button type="button" onclick="sumarInput()"> Sumar inputs</button>
+        <h1 id="resultado"></h1>
+    </form>
+</body>
+
+</html>

@@ -5,17 +5,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cambiar Imagenes con JS</title>
+    <style type="text/css">
+        img {
+            width: 200px;
+            height: 200px;
+
+        }
+    </style>
+
     <script type="text/javascript">
 
         window.onload = function () {
+            //Usamos el array del DOM con imagenes "document.images"
             var arrayImagenes = document.images;
+            //for (var objeto of array)
             for (var objImagen of arrayImagenes) {
-                objImagen.addEventListener("mouseover",)
+                objImagen.addEventListener("mouseover", imagenOver);
+                objImagen.addEventListener("mouseout", imagenOut);
             }
 
         }
-        
-        function cambioImagen
+
+        function imagenOver() {
+            this.src = "imgs/perroCaliente.jpg"
+        }
+        function imagenOut() {
+            this.src = "imgs/perro.jpg"
+        }
 
     </script>
 </head>

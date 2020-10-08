@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Controles de Forms</title>
+    <script type="text/javascript">
+        function mostrarDeporteSeleccionado() {
+            var select = document.getElementById("deportes");
+            //Array predeterminado -> options[]
+            for (var opcion of select.options) {
+                //Si es un option, para saber si esta seleccionado es SELECTED
+                if (opcion.selected == true) {
+                    //Solo entra 1 vez porque no esta escrito "multiple"
+                    var resultado = document.getElementById("resultado");
+                    //En el cliente podemos acceder al texto visible (innerText) o al valor (value) 
+                    resultado.innerText = "Valor: " + opcion.value + ", Texto: " + opcion.innerText;
+                }
+            }
+        }
+
+        function colorSeleccionado() {
+            //Con el mismo name en controles form, se genera un array dinamico en el DOM por su NAME
+            //!!!!!!!!!!!!SIEMPRE QUE SE USEN ELEMENTOS DE UN FORM, HAY QUE METERLO DENTRO DEL TAG <form>!!!!!!!!!!!!!!!!!
+            //var colores = document.forms[0].colors;
+            //var colores = document.geElementsByName("colors");
+            var colores = document.formularioColores.colors;
+            console.log(colores.length);
+            var texto = "";
+            for (var chk of colores) {
+                //Un input CHECKBOX/RADIO usa CHECKED para su selección
+                texto += chk.value + ", ";
+
+            }
+            var resultado = document.getElementById("resultado");
+            resultado.innerText = texto;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Controles Forms</h1>
+    <form id="formularioColores" name="formularioColores">
+
+        <label>Seleccione su color</label>
+        <ul>
+            <li>
+                <input type="checkbox" value="morado" name="colors" />Morado
+            </li>
+            <li>
+                <input type="checkbox" value="azul" name="colors" />Azul
+            </li>
+            <li>
+                <input type="checkbox" value="verde" name="colors" />Verde
+            </li>
+            <li>
+                <input type="checkbox" value="amarillo" name="colors" />Amarillo
+            <li>
+                <input type="checkbox" value="rojo" name="colors" />Rojo
+            </li>
+        </ul>
+    </form>
+
+    <button type="button" onclick="colorSeleccionado()">Mostrar Color Seleccionado</button>
+    <br>
+    <label>Deporte favorito: </label>
+    <select id="deportes">
+        <option value="petanca">Petanca</option>
+        <option value="volleyball">Volleyball</option>
+        <option value="levantamientoDeBirra">Levantamiento De Birra</option>
+        <option value="mus">Mus</option>
+    </select>
+    <button type="button" onclick="mostrarDeporteSeleccionado()">Mostrar seleccionado</button>
+    <h1 id="resultado" style="color:fuchsia"></h1>
+</body>
+
+</html>
