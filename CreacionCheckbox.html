@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Creacion de objetos Checkbox</title>
+    <script type="text/javascript">
+        var contador = 0;
+        window.onload = function () {
+            var rango = document.getElementById("rango");
+            rango.addEventListener("change", function () {
+                var contenedorCheck = document.getElementById("contenedorCheckbox");
+                contenedorCheck.innerHTML = "";
+                var valorRango = parseInt(rango.value);
+
+                var span = document.getElementById("valorRango");
+
+                span.innerText = valorRango;
+                for (var i = 0; i < valorRango; i++) {
+                    var label = document.createElement("label");
+                    contador++;
+                    label.for = "check" + contador;
+                    var check = document.createElement("input");
+                    check.type = "checkbox";
+                    check.id = "check" + contador;
+                    check.name = "objCheck";
+                    check.value = Math.trunc(Math.random() * (50 - 1) + 1);
+                    check.addEventListener("click", sumar);
+                    label.innerHTML = check.value;
+                    contenedorCheck.appendChild(check);
+                    contenedorCheck.appendChild(label);
+
+                }
+                contador = 0;
+            });
+        }
+        function sumar() {
+            var checks = document.getElementsByName("objCheck");
+            var labels = document.getElementsByTagName("label");
+            var suma = 0;
+            var resultado = document.getElementById("sumaCheckbox");
+            for (var checkbox of checks) {
+                if (checkbox.checked) {
+                    for (var label of labels) {
+                        if (checkbox.id == label.for) {
+                            suma += parseInt(checkbox.value);
+                        }
+                    }
+                }
+            }
+            resultado.innerText = suma;
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Creacion de objetos Checkbox</h1> <br>
+    <h1 style="color: blue;" id="sumaCheckbox"></h1>
+    <br>
+    Seleccione un rango: <input type="range" id="rango" max="10" min="1"><span id="valorRango"></span>
+    <br>
+    <div id="contenedorCheckbox"></div>
+</body>
+
+</html>

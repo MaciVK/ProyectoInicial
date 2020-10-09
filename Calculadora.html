@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora</title>
+    <style type="text/css">
+        table {
+            border-spacing: 5px;
+            border-collapse: separate;
+            background-color: gray;
+        }
+
+        td {
+            padding: 5px;
+        }
+    </style>
+    <script type="text/javascript">
+        var resultado = 0;
+        var arrayOperaciones = new Array()
+        var cadena = "";
+        window.onload = function () {
+            var botones = document.getElementsByTagName("button");
+            for (var boton of botones) {
+                if (boton.id != "igual") {
+                    boton.addEventListener("click", function () {
+                        document.getElementById("resultado").value += this.value;
+                        cadena += String(this.value);
+                    
+                    });
+                    
+                }
+
+                if (boton.id == "igual") {
+                    boton.addEventListener("click", function () {
+                        var aux = "";
+                        var operador = "";
+                        console.log(cadena);
+                        console.log(cadena.length);
+                        for (var i = 0; i < cadena.length; i++) {
+                           
+                            if (Number.isInteger(parseInt(cadena.charAt(i)))) {
+                                aux += cadena.charAt(i);
+                                console.log(aux);
+                            } else {
+                                arrayOperaciones.push(parseInt(aux));
+                                aux = "";
+                                operador += cadena.charAt(i);
+                            }
+
+                        }
+                        console.log(arrayOperaciones);
+                        console.log(operador);
+                        resultado = arrayOperaciones[0];
+                        arrayOperaciones.shift();
+                        for (var i = 0; i < operador.length; i++) {
+                            switch (operador.charAt(i)) {
+                                case "+":
+                                    resultado += arrayOperaciones[0];
+                                    arrayOperaciones.shift();
+                                    break;
+                                case "-":
+                                    resultado -= arrayOperaciones[0];
+                                    arrayOperaciones.shift();
+                                    break;
+                                case "*":
+                                    resultado *= arrayOperaciones[0];
+                                    arrayOperaciones.shift();
+                                    break;
+                                case "/":
+                                    resultado /= arrayOperaciones[0];
+                                    arrayOperaciones.shift();
+                                    break;
+                            }
+                        }
+                        document.getElementById("resultado").innerText = resultado;
+                        resultado = 0;
+                        arrayOperaciones = new Array()
+                        cadena = "";
+                    });
+                }
+
+            }
+
+        }
+    </script>
+</head>
+
+<body>
+    <table>
+        <tr>
+            <td colspan="4"><input type="text" name="resultado" id="resultado"></td>
+        </tr>
+        <tr>
+            <td><button type="button" id="1" value="1">1</button></td>
+            <td><button type="button" id="2" value="2">2</button></td>
+            <td><button type="button" id="3" value="3">3</button></td>
+            <td><button type="button" id="division" value="/">/</button></td>
+
+        </tr>
+        <tr>
+            <td><button type="button" id="4" value="4">4</button></td>
+            <td><button type="button" id="5" value="5">5</button></td>
+            <td><button type="button" id="6" value="6">6</button></td>
+            <td><button type="button" id="multiplicacion" value="*">*</button></td>
+
+        </tr>
+        <tr>
+            <td><button type="button" id="7" value="7">7</button></td>
+            <td><button type="button" id="8" value="8">8</button></td>
+            <td><button type="button" id="9" value="9">9</button></td>
+            <td><button type="button" id="suma" value="+">+</button></td>
+
+        </tr>
+        <tr>
+            <td colspan="2"><button type="button" id="0" value="0">0</button></td>
+            <td><button type="button" id="igual" value="=">=</button></td>
+            <td><button type="button" id="resta" value="-">-</button></td>
+        </tr>
+    </table>
+</body>
+
+</html>

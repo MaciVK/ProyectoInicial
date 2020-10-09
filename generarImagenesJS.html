@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generar Objetos JS</title>
+    <style type="text/css">
+        img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <script type="text/javascript">
+        function crearObjetos() {
+            var capa = document.getElementById("capa");
+            capa.innerHTML="";
+            var rango = document.getElementById("rango");
+            var valorRango = parseInt(rango.value);
+            document.getElementById("rangoValor").innerText = valorRango;
+            for (var i = 1; i <= valorRango; i++) {
+                //Se crea un obj por iteración
+                var img = document.createElement("img");
+                //se asignan propiedades
+                img.src = "imgs/perro.jpg";
+                //asignar evento al objeto
+                img.addEventListener("click", function () {
+                    this.src = "imgs/perroCaliente.jpg";
+                });
+                //dibujamos el objeto en el html, dentro de un parent
+                capa.appendChild(img);
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Generar Objetos JS</h1>
+    <form>
+        <input type="range" id="rango" value="1" onchange="crearObjetos()" min="1" max="50">
+        <span id="rangoValor"></span>
+        <hr>
+        <div id="capa"></div>
+    </form>
+</body>
+</html>
